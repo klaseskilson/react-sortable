@@ -7,7 +7,7 @@
     },
     componentDidMount: function() {
       var el = this.getDOMNode();
-      el.setAttribute('data-id', this.props.key);
+      el.setAttribute('data-id', this.props.reactKey);
       el.ondragend = this.sortEnd;
       el.ondragover = this.dragOver;
       el.ondragstart = this.sortStart;
@@ -55,7 +55,7 @@
       this.move(over, placement);
     },
     isDragging: function() {
-      return this.props.data.dragging == this.props.key
+      return this.props.data.dragging == this.props.reactKey
     }
   }
 

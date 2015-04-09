@@ -2,6 +2,8 @@
 
 ** VERY MUCH WORK IN PROGRESS **
 
+**The nested demo is not working on this repo**, feel free to fork and fix!
+
 A React component and mixin for creating sortable interfaces
 utilizing the HTML5 drag & drop API.
 
@@ -30,8 +32,8 @@ Here's a sample implementation using the react-sortable mixin.
 var SortableListItem = React.createClass({
   mixins: [Sortable],
   render: function() {
-    return this.transferPropsTo(
-      <li className={this.isDragging() ? "dragging" : ""}>{this.props.item}</li>
+    return (
+      <li {...this.props} className={this.isDragging() ? "dragging" : ""}>{this.props.item}</li>
     );
   }
 })
@@ -56,7 +58,7 @@ var App = React.createClass({
         <SortableListItem
           sort={this.sort}
           data={this.state.data}
-          key={i}
+          reactKey={i}
           item={item} />
       );
     }, this);
@@ -92,11 +94,11 @@ React.renderComponent(
 
 ### How it works
 
-The Sortable mixin will automatically attach the necessary drag event handlers providing you render your item with the react helper method: transferPropsTo.
+The Sortable mixin will automatically attach the necessary drag event handlers providing you render your item with `{...this.props}`.
 
 The Sortable mixin expects the following properties to be defined on your Sortable Item components:
 
 - **sort** (the method that will be called when an item is moved)
 - **data** (the complete list being sorted)
-- **key** (React recommends that you [use this](http://facebook.github.io/react/docs/reconciliation.html#keys))
+- **reactKey** (`key` is no longer available on `this.props` since React 12.0)
 - **item** (The item itself)

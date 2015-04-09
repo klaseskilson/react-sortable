@@ -2,8 +2,8 @@
 var SortableGridItem = React.createClass({
   mixins: [Sortable],
   render: function() {
-    return this.transferPropsTo(
-      <div className={this.isDragging() ? "dragging" : ""}>
+    return (
+      <div {...this.props} className={this.isDragging() ? "dragging" : ""}>
         <span>{this.props.item}</span>
       </div>
     );
